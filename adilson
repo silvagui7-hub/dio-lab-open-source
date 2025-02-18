@@ -1,0 +1,72 @@
+import statistics
+import csv
+
+def read_csv(file_path):
+    """Lê um arquivo CSV e retorna uma lista de números da coluna 'Data'."""
+    data = []
+    with open(file_path, mode='r') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            try:
+                data.append(float(row['Data']))
+            except ValueError:
+                continue  # Ignora valores não numéricos
+    return data
+
+def mean(data):
+    """Calcula a média dos dados."""
+    return statistics.mean(data)
+
+def median(data):
+    """Calcula a mediana dos dados."""
+    return statistics.median(data)
+
+def standard_deviation(data):
+    """Calcula o desvio padrão dos dados."""
+    return statistics.stdev(data)
+
+def convert_to_float(data):
+    """Converte uma lista de strings em números float."""
+    return [float(i) for i in data]
+
+import unittest
+from statistical_analysis.analysis import mean, median, standard_deviation
+from statistical_analysis.utils import convert_to_float
+
+class TestAnalysisMethods(unittest.TestCase):
+
+    def test_mean(self):
+        data = [1, 2, 3, 4, 5]
+        self.assertEqual(mean(data), 3)
+
+    def test_median(self):
+        data = [1, 2, 3, 4, 5]
+        self.assertEqual(median(data), 3)
+
+    def test_standard_deviation(self):
+        data = [1, 2, 3, 4, 5]
+        self.assertAlmostEqual(standard_deviation(data), 1.58, places=2)
+
+    def test_convert_to_float(self):
+        data = ['1.0', '2.5', '3.6']
+        self.assertEqual(convert_to_float(data), [1.0, 2.5, 3.6])
+
+if __name__ == "__main__":
+    unittest.main()
+
+# Statistical Analysis Project
+
+Este é um projeto simples para realizar análises estatísticas em um conjunto de dados numéricos. Ele permite calcular a média, a mediana e o desvio padrão de uma lista de números. O projeto também suporta a leitura de arquivos CSV.
+
+## Funcionalidades
+
+- Calcular a média (`mean`).
+- Calcular a mediana (`median`).
+- Calcular o desvio padrão (`standard_deviation`).
+- Ler dados de um arquivo CSV.
+
+## Como Usar
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/statistical-analysis.git
